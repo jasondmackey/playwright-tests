@@ -91,7 +91,7 @@ from playwright.sync_api import Page, expect
 
 def test_my_feature(page: Page):
     page.goto("https://example.com")
-    expect(page.locator("h1")).to_have_text("Example Domain")
+    expect(page.get_by_role("heading", level=1)).to_have_text("Example Domain")
 ```
 
 See the [Playwright for Python docs](https://playwright.dev/python/) and [pytest-playwright docs](https://playwright.dev/python/docs/test-runners) for more.
@@ -103,7 +103,7 @@ playwright-tests/
 ├── .github/workflows/
 │   └── tests.yml               # GitHub Actions CI workflow
 ├── pyproject.toml              # Project config and dependencies
-├── pytest.ini                  # pytest defaults (browser=chromium)
+├── pytest.ini                  # pytest configuration
 ├── tests/
 │   ├── test_example.py         # Basic tests against playwright.dev
 │   ├── test_setup_verify.py    # Setup verification against example.com
