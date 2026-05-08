@@ -11,7 +11,7 @@ def test_search_and_navigate(page: Page):
     search_box.press("Enter")
 
     expect(page).to_have_title(re.compile("Playwright"))
-    heading = page.locator("#firstHeading")
+    heading = page.get_by_role("heading", level=1)
     expect(heading).to_be_visible()
 
 
@@ -19,12 +19,12 @@ def test_form_interaction(page: Page):
     """Fill out and submit a form on httpbin."""
     page.goto("https://httpbin.org/forms/post")
 
-    page.locator("input[name='custname']").fill("Test User")
-    page.locator("input[name='custtel']").fill("555-1234")
-    page.locator("input[name='custemail']").fill("test@example.com")
-    page.locator("input[name='size'][value='medium']").check()
-    page.locator("input[name='topping'][value='cheese']").check()
-    page.locator("textarea[name='comments']").fill("E2E test order")
+    page.get_by_label("Customer name").fill("Test User")
+    page.get_by_label("Telephone").fill("555-1234")
+    page.get_by_label("E-mail address").fill("test@example.com")
+    page.get_by_role("radio", name="Medium").check()
+    page.get_by_role("checkbox", name="Extra Cheese").check()
+    page.get_by_label("Delivery instructions").fill("E2E test order")
 
     page.get_by_role("button", name="Submit order").click()
     expect(page).to_have_url(re.compile(r"httpbin\.org/post"))

@@ -11,7 +11,7 @@ def test_browser_navigates(page: Page):
 def test_page_content(page: Page):
     """Browser can query DOM content."""
     page.goto("https://example.com")
-    heading = page.locator("h1")
+    heading = page.get_by_role("heading", level=1)
     expect(heading).to_have_text("Example Domain")
 
 
