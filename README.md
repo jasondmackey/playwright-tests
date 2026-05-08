@@ -23,10 +23,14 @@ cd playwright-tests
 pip install -e .
 ```
 
-3. Install the Chromium browser for Playwright:
+3. Install browsers for Playwright:
 
 ```sh
+# Chromium only (default)
 playwright install chromium
+
+# All supported browsers
+playwright install chromium firefox webkit
 ```
 
 > **Note (macOS):** If `playwright` is not found, you may need to add the Python user bin directory to your PATH:
@@ -40,8 +44,15 @@ playwright install chromium
 ## Running Tests
 
 ```sh
-# Run all tests (headless)
+# Run all tests (headless, default browser: chromium)
 pytest
+
+# Run with a specific browser
+pytest --browser firefox
+pytest --browser webkit
+
+# Run with all browsers
+pytest --browser chromium --browser firefox --browser webkit
 
 # Run with visible browser
 pytest --headed
@@ -67,7 +78,9 @@ pytest -v
 
 ## CI
 
-Tests run automatically via GitHub Actions on every push and pull request to `main`. You can also trigger a run manually from the [Actions tab](https://github.com/jasondmackey/playwright-tests/actions).
+Tests run automatically via GitHub Actions on every push and pull request to `main` across three browsers (Chromium, Firefox, WebKit) in parallel. You can also trigger a run manually from the [Actions tab](https://github.com/jasondmackey/playwright-tests/actions).
+
+On failure, screenshots and Playwright traces are uploaded as artifacts per browser.
 
 ## Writing New Tests
 
