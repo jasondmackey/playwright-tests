@@ -1,0 +1,14 @@
+[project]
+name = "playwright-tests"
+version = "0.1.0"
+description = "Browser-based automated testing with Playwright"
+requires-python = ">=3.11"
+dependencies = [
+    "playwright",
+    "pytest",
+    "pytest-playwright",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
